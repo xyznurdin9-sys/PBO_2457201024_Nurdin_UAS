@@ -1,0 +1,140 @@
+@model IEnumerable<SoundRentalApp.Models.Equipment>
+
+@{
+    ViewData["Title"] = "Equipment Report";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-warning">
+
+            <h3>
+
+                <i class="bi bi-speaker-fill"></i>
+
+                Equipment Report
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-warning">
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Code</th>
+
+                        <th>Equipment</th>
+
+                        <th>Category</th>
+
+                        <th>Brand</th>
+
+                        <th>Price</th>
+
+                        <th>Stock</th>
+
+                        <th>Available</th>
+
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td>@item.EquipmentCode</td>
+
+                            <td>@item.EquipmentName</td>
+
+                            <td>@item.Category?.CategoryName</td>
+
+                            <td>@item.Brand</td>
+
+                            <td class="text-end">
+
+                                Rp @item.RentalPrice.ToString("N0")
+
+                            </td>
+
+                            <td>@item.Stock</td>
+
+                            <td>@item.AvailableStock</td>
+
+                            <td>
+
+                                @if (item.Status == "Available")
+                                {
+                                    <span class="badge bg-success">
+
+                                        Available
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+
+                                        Not Available
+
+                                    </span>
+                                }
+
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+    <div class="d-flex justify-content-between mb-3">
+
+        <h3>Equipment Report</h3>
+
+        <div>
+
+            <a asp-action="EquipmentPdf" class="btn btn-danger">
+
+                <i class="bi bi-file-earmark-pdf"></i>
+                Export PDF
+
+            </a>
+
+            <a asp-action="EquipmentExcel" class="btn btn-success">
+
+                <i class="bi bi-file-earmark-excel"></i>
+                Export Excel
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

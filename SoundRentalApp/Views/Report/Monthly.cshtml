@@ -1,0 +1,184 @@
+@model IEnumerable<SoundRentalApp.Models.RentalHeader>
+
+@{
+    ViewData["Title"] = "Monthly Report";
+    decimal total = Model.Sum(x => x.GrandTotal);
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+
+            <h3>
+                <i class="bi bi-calendar-month"></i>
+                Monthly Rental Report
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="get" class="row g-3 mb-4">
+
+                <div class="col-md-3">
+
+                    <select name="month" class="form-select">
+
+                        @for (int i = 1; i <= 12; i++)
+                        {
+                            if (i == (int)ViewBag.Month)
+                            {
+                                <option value="@i" selected>
+                                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                                </option>
+                            }
+                            else
+                            {
+                                <option value="@i">
+                                    @System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i)
+                                </option>
+                            }
+                        }
+
+                    </select>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <input type="number" name="year" class="form-control" value="@ViewBag.Year" />
+
+                </div>
+
+                <div class="col-md-2">
+
+                    <button class="btn btn-primary">
+
+                        <i class="bi bi-search"></i>
+
+                        Filter
+
+                    </button>
+
+                </div>
+
+            </form>
+            <div class="d-flex justify-content-between mb-3">
+
+                <h3>Monthly Rental Report</h3>
+
+                <div>
+
+                    <a asp-action="MonthlyPdf" asp-route-month="@ViewBag.Month" asp-route-year="@ViewBag.Year"
+                       class="btn btn-danger">
+
+                        <i class="bi bi-file-earmark-pdf"></i>
+                        Export PDF
+
+                    </a>
+
+                    <a asp-action="MonthlyExcel" asp-route-month="@ViewBag.Month" asp-route-year="@ViewBag.Year"
+                       class="btn btn-success">
+
+                        <i class="bi bi-file-earmark-excel"></i>
+                        Export Excel
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-primary">
+
+                    <tr>
+
+                        <th>No</th>
+                        <th>Rental No</th>
+                        <th>Customer</th>
+                        <th>Rental Date</th>
+                        <th>Return Date</th>
+                        <th>Status</th>
+                        <th class="text-end">Grand Total</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td>@item.RentalNumber</td>
+
+                            <td>@item.Customer?.CustomerName</td>
+
+                            <td>@item.RentalDate.ToString("dd/MM/yyyy")</td>
+
+                            <td>@item.ReturnDate.ToString("dd/MM/yyyy")</td>
+
+                            <td>
+
+                                @if (item.Status == "Booked")
+                                {
+                                    <span class="badge bg-warning">Booked</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">Returned</span>
+                                }
+
+                            </td>
+
+                            <td class="text-end">
+
+                                Rp @item.GrandTotal.ToString("N0")
+
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+                <tfoot class="table-light">
+
+                    <tr>
+
+                        <th colspan="6" class="text-end">
+
+                            Total Revenue
+
+                        </th>
+
+                        <th class="text-end">
+
+                            Rp @total.ToString("N0")
+
+                        </th>
+
+                    </tr>
+
+                </tfoot>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
