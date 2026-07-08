@@ -1,0 +1,301 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Sound Rental System</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+</head>
+
+<body>
+
+    <!-- ========================= NAVBAR ========================= -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow">
+
+        <div class="container">
+
+            <a class="navbar-brand fw-bold"
+               asp-controller="Dashboard"
+               asp-action="Index">
+
+                <i class="bi bi-speaker-fill"></i>
+
+                Sound Rental
+
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMain">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse"
+                 id="navbarMain">
+
+                <ul class="navbar-nav me-auto">
+
+                    <!-- Dashboard -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           asp-controller="Dashboard"
+                           asp-action="Index">
+
+                            <i class="bi bi-speedometer2"></i>
+
+                            Dashboard
+
+                        </a>
+
+                    </li>
+
+                    <!-- MASTER -->
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           data-bs-toggle="dropdown">
+
+                            <i class="bi bi-database"></i>
+
+                            Master Data
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Category"
+                                   asp-action="Index">
+
+                                    <i class="bi bi-tags"></i>
+
+                                    Category
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Equipment"
+                                   asp-action="Index">
+
+                                    <i class="bi bi-speaker"></i>
+
+                                    Equipment
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Customer"
+                                   asp-action="Index">
+
+                                    <i class="bi bi-people"></i>
+
+                                    Customer
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                    <!-- RENTAL -->
+
+                    <li class="nav-item">
+
+                        <a class="nav-link"
+                           asp-controller="Rental"
+                           asp-action="Index">
+
+                            <i class="bi bi-cart-check"></i>
+
+                            Rental
+
+                        </a>
+
+                    </li>
+
+                    <!-- REPORT -->
+
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle"
+                           href="#"
+                           data-bs-toggle="dropdown">
+
+                            <i class="bi bi-file-earmark-bar-graph"></i>
+
+                            Report
+
+                        </a>
+
+                        <ul class="dropdown-menu">
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Index">
+
+                                    <i class="bi bi-house"></i>
+
+                                    Report Menu
+
+                                </a>
+
+                            </li>
+
+                            <li><hr class="dropdown-divider" /></li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Daily">
+
+                                    <i class="bi bi-calendar-day"></i>
+
+                                    Daily Report
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Monthly">
+
+                                    <i class="bi bi-calendar-month"></i>
+
+                                    Monthly Report
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Yearly">
+
+                                    <i class="bi bi-calendar3"></i>
+
+                                    Yearly Report
+
+                                </a>
+
+                            </li>
+
+                            <li><hr class="dropdown-divider" /></li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Customer">
+
+                                    <i class="bi bi-people"></i>
+
+                                    Customer Report
+
+                                </a>
+
+                            </li>
+
+                            <li>
+
+                                <a class="dropdown-item"
+                                   asp-controller="Report"
+                                   asp-action="Equipment">
+
+                                    <i class="bi bi-speaker"></i>
+
+                                    Equipment Report
+
+                                </a>
+
+                            </li>
+
+                        </ul>
+
+                    </li>
+
+                </ul>
+
+                <!-- RIGHT -->
+
+                <span class="navbar-text text-white">
+
+                    <i class="bi bi-person-circle"></i>
+
+                    Administrator
+
+                </span>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================= CONTENT ========================= -->
+
+    <main class="container mt-4">
+
+        @RenderBody()
+
+    </main>
+
+    <!-- ========================= FOOTER ========================= -->
+
+    <footer class="border-top bg-light mt-5">
+
+        <div class="container py-3 text-center">
+
+            © 2026 Sound Rental System |
+            Developed with ASP.NET Core MVC
+
+        </div>
+
+    </footer>
+
+    <!-- ========================= SCRIPT ========================= -->
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>
