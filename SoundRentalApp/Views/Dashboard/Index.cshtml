@@ -1,0 +1,167 @@
+@model SoundRentalApp.ViewModels.DashboardViewModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container-fluid mt-4">
+
+    <h2 class="mb-4">
+        Dashboard
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Category</h6>
+
+                    <h2 class="text-primary">
+                        @Model.TotalCategory
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Equipment</h6>
+
+                    <h2 class="text-success">
+                        @Model.TotalEquipment
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Customer</h6>
+
+                    <h2 class="text-warning">
+                        @Model.TotalCustomer
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Rental</h6>
+
+                    <h2 class="text-danger">
+                        @Model.TotalRental
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Rental Active</h6>
+
+                    <h2 class="text-info">
+                        @Model.ActiveRental
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Returned Rental</h6>
+
+                    <h2 class="text-success">
+                        @Model.ReturnedRental
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Available Stock</h6>
+
+                    <h2 class="text-primary">
+                        @Model.AvailableEquipment
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3 mb-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h6>Total Revenue</h6>
+
+                    <h4 class="text-danger">
+
+                        Rp @Model.TotalRevenue.ToString("N0")
+
+                    </h4>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
