@@ -1,0 +1,122 @@
+@model IEnumerable<SoundRentalApp.Models.Category>
+
+@{
+    ViewData["Title"] = "Master Category";
+}
+
+<div class="container mt-4">
+
+    <partial name="_Alert"/>
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+
+            <h4 class="mb-0">
+                Master Category
+            </h4>
+
+            <a asp-action="Create"
+               class="btn btn-light">
+
+                + Add Category
+
+            </a>
+
+        </div>
+
+        <div class="card-body">
+
+            <table class="table table-hover table-bordered align-middle">
+
+                <thead class="table-light">
+
+                    <tr>
+
+                        <th width="15%">Code</th>
+
+                        <th>Name</th>
+
+                        <th>Description</th>
+
+                        <th width="20%">Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>@item.CategoryCode</td>
+
+                                <td>@item.CategoryName</td>
+
+                                <td>@item.Description</td>
+
+                                <td>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-warning btn-sm">
+
+                                        Edit
+
+                                    </a>
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-info btn-sm">
+
+                                        Detail
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.Id"
+                                       class="btn btn-danger btn-sm">
+
+                                        Delete
+
+                                    </a>
+
+                                </td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+
+                            <td colspan="4"
+                                class="text-center">
+
+                                No data available
+
+                            </td>
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        <div class="card-footer">
+
+            Total Category :
+            <strong>@Model.Count()</strong>
+
+        </div>
+
+    </div>
+
+</div>

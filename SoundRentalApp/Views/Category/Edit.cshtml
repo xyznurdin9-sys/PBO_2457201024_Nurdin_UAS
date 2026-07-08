@@ -1,0 +1,77 @@
+@model SoundRentalApp.Resources.ViewModels.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>Edit Category</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Edit" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger">
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="CategoryCode" class="form-label">
+                    </label>
+
+                    <input asp-for="CategoryCode" class="form-control" readonly />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="CategoryName" class="form-label">
+                    </label>
+
+                    <input asp-for="CategoryName" class="form-control" />
+
+                    <span asp-validation-for="CategoryName" class="text-danger">
+                    </span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Description" class="form-label">
+                    </label>
+
+                    <textarea asp-for="Description" class="form-control" rows="4">
+                    </textarea>
+
+                </div>
+
+                <button class="btn btn-warning">
+                    Update
+                </button>
+
+                <a asp-action="Index" class="btn btn-secondary">
+                    Back
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
