@@ -1,0 +1,84 @@
+@model SoundRentalApp.Resources.ViewModels.CategoryViewModel
+
+@{
+    ViewData["Title"] = "Create Category";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-success text-white">
+
+            <h4>Create Category</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Create" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="mb-3">
+
+                    <label asp-for="CategoryCode" class="form-label"></label>
+
+                    <input asp-for="CategoryCode"
+                           class="form-control"
+                           readonly />
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="CategoryName" class="form-label"></label>
+
+                    <input asp-for="CategoryName"
+                           class="form-control" />
+
+                    <span asp-validation-for="CategoryName"
+                          class="text-danger"></span>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label asp-for="Description" class="form-label"></label>
+
+                    <textarea asp-for="Description"
+                              class="form-control"
+                              rows="4"></textarea>
+
+                    <span asp-validation-for="Description"
+                          class="text-danger"></span>
+
+                </div>
+
+                <button type="submit" class="btn btn-success">
+
+                    <i class="bi bi-check-circle"></i>
+                    Save
+
+                </button>
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    <i class="bi bi-arrow-left"></i>
+                    Back
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
