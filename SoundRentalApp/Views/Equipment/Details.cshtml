@@ -1,0 +1,127 @@
+@model SoundRentalApp.Models.Equipment
+
+@{
+    ViewData["Title"] = "Equipment Detail";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-info text-white">
+
+            <h4>Equipment Detail</h4>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row">
+
+                <div class="col-md-4 text-center">
+
+                    @if (!string.IsNullOrEmpty(Model.Image))
+                    {
+                        <img src="~/uploads/@Model.Image"
+                             class="img-fluid rounded shadow"
+                             style="max-height:300px;" />
+                    }
+                    else
+                    {
+                        <img src="~/images/no-image.png"
+                             class="img-fluid rounded shadow"
+                             style="max-height:300px;" />
+                    }
+
+                </div>
+
+                <div class="col-md-8">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th width="35%">Equipment Code</th>
+                            <td>@Model.EquipmentCode</td>
+                        </tr>
+
+                        <tr>
+                            <th>Equipment Name</th>
+                            <td>@Model.EquipmentName</td>
+                        </tr>
+
+                        <tr>
+                            <th>Category</th>
+                            <td>@Model.Category?.CategoryName</td>
+                        </tr>
+
+                        <tr>
+                            <th>Brand</th>
+                            <td>@Model.Brand</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rental Price</th>
+                            <td>Rp @Model.RentalPrice.ToString("N0")</td>
+                        </tr>
+
+                        <tr>
+                            <th>Total Stock</th>
+                            <td>@Model.Stock</td>
+                        </tr>
+
+                        <tr>
+                            <th>Available Stock</th>
+                            <td>@Model.AvailableStock</td>
+                        </tr>
+
+                        <tr>
+                            <th>Condition</th>
+                            <td>@Model.Condition</td>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+                            <td>
+
+                                @if(Model.Status=="Available")
+                                {
+                                    <span class="badge bg-success">
+                                        Available
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Unavailable
+                                    </span>
+                                }
+
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <a asp-action="Edit"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-warning">
+
+                        Edit
+
+                    </a>
+
+                    <a asp-action="Index"
+                       class="btn btn-secondary">
+
+                        Back
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

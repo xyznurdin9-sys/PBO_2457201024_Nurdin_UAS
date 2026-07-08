@@ -1,0 +1,166 @@
+@model IEnumerable<SoundRentalApp.Models.Equipment>
+
+@{
+    ViewData["Title"] = "Master Equipment";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+
+            <h4 class="mb-0">Master Equipment</h4>
+
+            <a asp-action="Create" class="btn btn-light">
+                <i class="bi bi-plus-circle"></i>
+                Add Equipment
+            </a>
+
+        </div>
+
+        <div class="card-body">
+
+            @if (TempData["Success"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Success"]
+                </div>
+            }
+
+            <table class="table table-bordered table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th width="60">No</th>
+
+                        <th width="90">Image</th>
+
+                        <th>Code</th>
+
+                        <th>Equipment</th>
+
+                        <th>Category</th>
+
+                        <th>Brand</th>
+
+                        <th>Price</th>
+
+                        <th>Stock</th>
+
+                        <th>Available</th>
+
+                        <th>Status</th>
+
+                        <th width="220">Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td class="text-center">
+
+                                @if (!string.IsNullOrEmpty(item.Image))
+                                {
+                                    <img src="~/uploads/@item.Image"
+                                         width="70"
+                                         height="70"
+                                         class="rounded border" />
+                                }
+                                else
+                                {
+                                    <img src="~/images/no-image.png"
+                                         width="70"
+                                         height="70"
+                                         class="rounded border" />
+                                }
+
+                            </td>
+
+                            <td>@item.EquipmentCode</td>
+
+                            <td>@item.EquipmentName</td>
+
+                            <td>@item.Category?.CategoryName</td>
+
+                            <td>@item.Brand</td>
+
+                            <td class="text-end">
+                                Rp @item.RentalPrice.ToString("N0")
+                            </td>
+
+                            <td class="text-center">
+                                @item.Stock
+                            </td>
+
+                            <td class="text-center">
+                                @item.AvailableStock
+                            </td>
+
+                            <td>
+
+                                @if (item.Status == "Available")
+                                {
+                                    <span class="badge bg-success">
+                                        Available
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        Unavailable
+                                    </span>
+                                }
+
+                            </td>
+
+                            <td>
+
+                                <a asp-action="Details"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-info btn-sm">
+                                    Detail
+                                </a>
+
+                                <a asp-action="Edit"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-warning btn-sm">
+                                    Edit
+                                </a>
+
+                                <a asp-action="Delete"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-danger btn-sm">
+                                    Delete
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
