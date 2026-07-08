@@ -1,0 +1,247 @@
+@model SoundRentalApp.Models.RentalHeader
+
+@{
+    ViewData["Title"] = "Rental Detail";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white d-flex justify-content-between">
+
+            <h4 class="mb-0">
+                Rental Detail
+            </h4>
+
+            <div>
+
+                <a asp-action="Index"
+                   class="btn btn-light">
+
+                    Back
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="row mb-4">
+
+                <div class="col-md-6">
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th width="180">Rental Number</th>
+                            <td>@Model.RentalNumber</td>
+                        </tr>
+
+                        <tr>
+                            <th>Customer</th>
+                            <td>@Model.Customer?.CustomerName</td>
+                        </tr>
+
+                        <tr>
+                            <th>Rental Date</th>
+                            <td>@Model.RentalDate.ToString("dd MMM yyyy")</td>
+                        </tr>
+
+                        <tr>
+                            <th>Return Date</th>
+                            <td>@Model.ReturnDate.ToString("dd MMM yyyy")</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <table class="table table-borderless">
+
+                        <tr>
+                            <th width="180">Rental Days</th>
+                            <td>@Model.RentalDays Day(s)</td>
+                        </tr>
+
+                        <tr>
+                            <th>Status</th>
+
+                            <td>
+
+                                @if(Model.Status=="Booked")
+                                {
+                                    <span class="badge bg-warning">
+                                        Booked
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-success">
+                                        @Model.Status
+                                    </span>
+                                }
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <th>Created</th>
+                            <td>@Model.CreatedAt.ToString("dd MMM yyyy HH:mm")</td>
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <hr />
+
+            <h5>Equipment Detail</h5>
+
+            <table class="table table-bordered table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+
+                        <th>No</th>
+
+                        <th>Equipment</th>
+
+                        <th>Price</th>
+
+                        <th>Qty</th>
+
+                        <th>Subtotal</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    @{
+                        int no = 1;
+                    }
+
+                    @foreach(var item in Model.RentalDetails)
+                    {
+                        <tr>
+
+                            <td>@no</td>
+
+                            <td>@item.Equipment?.EquipmentName</td>
+
+                            <td>
+                                @item.RentalPrice.ToString("N0")
+                            </td>
+
+                            <td>
+                                @item.Qty
+                            </td>
+
+                            <td>
+                                @item.Subtotal.ToString("N0")
+                            </td>
+
+                        </tr>
+
+                        no++;
+                    }
+
+                </tbody>
+
+            </table>
+
+            <hr />
+
+            <div class="row justify-content-end">
+
+                <div class="col-md-5">
+
+                    <table class="table table-bordered">
+
+                        <tr>
+
+                            <th>Grand Total</th>
+
+                            <td class="text-end">
+
+                                @Model.GrandTotal.ToString("N0")
+
+                            </td>
+
+                        </tr>
+
+                        <tr>
+
+                            <th>Down Payment</th>
+
+                            <td class="text-end">
+
+                                @Model.DownPayment.ToString("N0")
+
+                            </td>
+
+                        </tr>
+
+                        <tr class="table-warning">
+
+                            <th>Remaining Payment</th>
+
+                            <td class="text-end">
+
+                                @Model.RemainingPayment.ToString("N0")
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+            <div class="mt-3">
+
+                <a asp-action="Index"
+                   class="btn btn-secondary">
+
+                    Back
+
+                </a>
+
+                <a asp-action="Print"
+                   asp-route-id="@Model.Id"
+                   class="btn btn-danger">
+
+                    Print Invoice
+
+                </a>
+
+                @if(Model.Status=="Booked")
+                {
+                    <a asp-action="Return"
+                       asp-route-id="@Model.Id"
+                       class="btn btn-success">
+
+                        Return Equipment
+
+                    </a>
+                }
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
